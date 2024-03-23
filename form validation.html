@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact & Login Form</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+    }
+
+    form {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        width: 300px;
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .error {
+        color: red;
+        font-size: 0.8em;
+    }
+</style>
+</head>
+<body>
+
+<!-- Contact Form -->
+<form id="contactForm">
+    <h2>Contact Form</h2>
+    <input type="text" id="contactName" placeholder="Your Name">
+    <span class="error" id="contactNameError"></span>
+    <input type="email" id="contactEmail" placeholder="Your Email">
+    <span class="error" id="contactEmailError"></span>
+    <button type="submit">Submit</button>
+</form>
+
+<!-- Login Form -->
+<form id="loginForm">
+    <h2>Login Form</h2>
+    <input type="email" id="loginEmail" placeholder="Email">
+    <span class="error" id="loginEmailError"></span>
+    <input type="password" id="loginPassword" placeholder="Password">
+    <span class="error" id="loginPasswordError"></span>
+    <button type="submit">Login</button>
+</form>
+
+<script>
+    // Contact Form Validation
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var name = document.getElementById('contactName').value.trim();
+        var email = document.getElementById('contactEmail').value.trim();
+        var nameError = document.getElementById('contactNameError');
+        var emailError = document.getElementById('contactEmailError');
+        var valid = true;
+
+        nameError.textContent = '';
+        emailError.textContent = '';
+
+        if (name === '') {
+            nameError.textContent = 'Name is required';
+            valid = false;
+        }
+
+        if (email === '') {
+            emailError.textContent = 'Email is required';
+            valid = false;
+        } else if (!isValidEmail(email)) {
+            emailError.textContent = 'Please enter a valid email address';
+            valid = false;
+        }
+
+        if (valid) {
+            // Form submission logic here
+            alert('Contact form submitted successfully');
+            document.getElementById('contactForm').reset();
+        }
+    });
+
+    // Login Form Validation
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var email = document.getElementById('loginEmail').value.trim();
+        var password = document.getElementById('loginPassword').value.trim();
+        var emailError = document.getElementById('loginEmailError');
+        var passwordError = document.getElementById('loginPasswordError');
+        var valid = true;
+
+        emailError.textContent = '';
+        passwordError.textContent = '';
+
+        if (email === '') {
+            emailError.textContent = 'Email is required';
+            valid = false;
+        } else if (!isValidEmail(email)) {
+            emailError.textContent = 'Please enter a valid email address';
+            valid = false;
+        }
+
+        if (password === '') {
+            passwordError.textContent = 'Password is required';
+            valid = false;
+        }
+
+        if (valid) {
+            // Form submission logic here
+            alert('Login form submitted successfully');
+            document.getElementById('loginForm').reset();
+        }
+    });
+
+    // Function to validate email format
+    function isValidEmail(email) {
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+</script>
+
+</body>
+</html>
